@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  pgsql:
+    image: 'postgres:15'
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - './data-pgsql:/var/lib/postgresql/data'
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - 'postgres'
+        - '-U'
+        - 'dbmin'
+      retries: 3
+      timeout: 5s
+

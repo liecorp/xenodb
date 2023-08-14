@@ -2,6 +2,7 @@ version: '3.9'
 services:
   pgsql:
     image: 'postgres:15'
+    restart: unless-stopped
     ports:
       - '${DB_PORT}:5432'
     environment:

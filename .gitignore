@@ -1,3 +1,6 @@
 # Excludes data from repo
 data-pgsql/
 
+# Excludes environment variables
+.env
+
